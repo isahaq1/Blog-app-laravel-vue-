@@ -22,7 +22,7 @@
                 </ul>
             </nav>
             <div class="tm-mb-65">
-                <a rel="nofollow" href="https://fb.com/templatemo" class="tm-social-link">
+                <a rel="nofollow" href="" class="tm-social-link">
                     <i class="fab fa-facebook tm-social-icon"></i>
                 </a>
                 <a href="https://twitter.com" class="tm-social-link">
@@ -36,7 +36,8 @@
                 </a>
             </div>
             <p class="tm-mb-80 pr-5 text-white">
-                Xtra Blog is a multi-purpose HTML template from TemplateMo website. Left side is a sticky menu bar. Right side content will scroll up and down.
+               What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
             </p>
         </div>
     </header>
@@ -60,13 +61,13 @@
                        {{ pst.blog_body }}
                     </p>
                     <div class="d-flex justify-content-between tm-pt-45">
-                        <span class="tm-color-primary">Travel . Events</span>
-                        <span class="tm-color-primary">June 24, 2020</span>
+                        <span class="tm-color-primary">Created At</span>
+                        <span class="tm-color-primary">{{ pst.created_at }}</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between">
-                        <span>36 comments</span>
-                        <span>by Admin Nat</span>
+                        <span> {{ pst.tag }}</span>
+                        <span>{{ pst.category }}</span>
                     </div>
                 </article>
                 
@@ -79,10 +80,10 @@
             <footer class="row tm-row">
                 <hr class="col-12">
                 <div class="col-md-6 col-12 tm-color-gray">
-                    Design: <a rel="nofollow" target="_parent" href="https://templatemo.com" class="tm-external-link">TemplateMo</a>
+                    Design: 
                 </div>
                 <div class="col-md-6 col-12 tm-color-gray tm-copyright">
-                    Copyright 2020 Xtra Blog Company Co. Ltd.
+                    iSocial@copyright
                 </div>
             </footer>
         </main>
