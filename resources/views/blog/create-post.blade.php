@@ -78,14 +78,18 @@
 </div>
 </div>
 </div>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 </section>
 @include('admin.footer')
+<script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+
+
     <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
 <script type="text/javascript">
      ClassicEditor
         .create( document.querySelector( '#description' ), {
             ckfinder: {
-                uploadUrl: '{{route('ckeditor.upload').'?_token='.csrf_token()}}'
+                uploadUrl: '{{route('ckeditor.upload').'?_token='.csrf_token()}}',
             }
         },{
             alignment: {
@@ -97,6 +101,8 @@
         .catch( error => {
             console.error( error );
         })
+
+
 </script>
 <script>
     //Define an adapter to upload the files

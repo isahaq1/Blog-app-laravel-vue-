@@ -4,19 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Post;
+use App\Repositories\Blogs;
 
 class PostController extends Controller
 {
+    protected $blogs;
+    public function __construct(Blogs $blogs){
+     $this->blogs = $blogs;
+    }
     // post listing
     public function index() {
-        $posts      =   Post::orderBy("id", "desc")->paginate(5);
+        $posts      =   $this->blogs->all();
         return view("blog.index", compact("posts"));
     }
 
      public function vue_list()
     {
-        $posts = Post::all();
+        $posts = $this->blogs->frontendlist();
         return response()->json($posts);
          
     }
@@ -37,6 +41,11 @@ class PostController extends Controller
             $path = $request->file('blog_banner')->store('public/blog_banner');
         }
 
+        $request->validate([
+            'name'    => ['required'],
+            'slug'    => ['required']
+        ]);
+
         $postArray      =   array( 
             "name"           => $request->title,
             "slug"           => $request->description,
@@ -46,7 +55,7 @@ class PostController extends Controller
             "tag"            => $request->tag
         );
 
-        $post  =       Post::create($postArray);
+        $post  =  $this->blogs->save_post($postArray);
 
         if(!is_null($post)) {
             return back()->with("success", "Success! Post created");
@@ -72,7 +81,7 @@ class PostController extends Controller
      $request->file('upload')->move(public_path('images'), $fileName);
 
      $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-     $url = asset('images/'.$fileName); 
+     $url = asset('public/images/'.$fileName); 
      $msg = 'Image uploaded successfully'; 
      $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
            
@@ -81,19 +90,5 @@ class PostController extends Controller
  }
 }
 
-public function store(Request $request)
-   {
-      $path_url = 'storage/' . Auth::id();
 
-      if ($request->hasFile('upload')) {
-         $originName = $request->file('upload')->getClientOriginalName();
-         $fileName = pathinfo($originName, PATHINFO_FILENAME);
-         $extension = $request->file('upload')->getClientOriginalExtension();
-         $fileName = Str::slug($fileName) . '_' . time() . '.' . $extension;
-         $request->file('upload')->move(public_path($path_url), $fileName);
-         $url = asset($path_url . '/' . $fileName);
-      }
-
-      return response()->json(['url' => $url]);
-   }
 }
