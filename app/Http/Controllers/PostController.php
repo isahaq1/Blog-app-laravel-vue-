@@ -41,10 +41,7 @@ class PostController extends Controller
             $path = $request->file('blog_banner')->store('public/blog_banner');
         }
 
-        $request->validate([
-            'name'    => ['required'],
-            'slug'    => ['required']
-        ]);
+        
 
         $postArray      =   array( 
             "name"           => $request->title,
